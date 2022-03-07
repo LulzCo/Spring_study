@@ -18,12 +18,10 @@ Hello
 </html>
 ```
 
-
-
 - 스프링 부트가 제공하는 welcome page 기능
   - static/index.html 을 올려두면 welcome page 기능을 한다
 
-
+-----
 
 src/main/java/com/hello/hellospring/controller/HelloController.java
 
@@ -37,9 +35,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HelloController {
 
+    // get, post 할 때의 그 get을 의미
     @GetMapping("hello")
+    // 웹 브라우저에서 /hello 요청을 받는다.
     public String hello(Model model) {
-        model.addAttribute("data", "hello");
+        // data : "hello!!"
+        model.addAttribute("data", "hello!!");
+        
+        // resources/templates/hello.html 로 넘긴다.
         return "hello";
     }
 }
@@ -68,4 +71,6 @@ src/main/resources/templates/hello.html
   hello.html의 data는 HelloController.java의 data를 의미
 
   data 값 : hello!!
+
+  
 
