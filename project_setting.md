@@ -127,6 +127,12 @@ src/main/resources/templates/hello.html
   hello.html의 data는 HelloController.java의 data를 의미
 
   data 값 : hello!!
+  
+- ```
+  <p th:text="'안녕하세요. ' + ${data}" > 안녕하세요. 손님</p>
+  ```
+
+  data의 값이 있으면 <p> 부분이 들어가고 값이 없으면 손님 값으로 대체된다.
 
 
 

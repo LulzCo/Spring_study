@@ -14,7 +14,4 @@ ex) src/resources/static/hello-static.html
 
 ## mvc and template engine
 
-
-
-
-
+  
