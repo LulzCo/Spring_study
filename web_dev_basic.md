@@ -86,4 +86,11 @@ controller/HelloController.java
 
 { "name" : "spring!!!"}
 
-데이터 형식으로 html 출력
+json 형식으로 html 출력
+
+
+
+-----
+
+- @ResponseBody : html 태그에서 Body에 반응하라는 의미의 어노테이션ㅇ 
+- @GetMappring : url 생성 어노테이션
