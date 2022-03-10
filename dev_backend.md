@@ -158,17 +158,95 @@
 
   - Assertions : 인텔리제이 내 터미널에서 오류가 있는지 없는지 확인 가능(초록불 성공, 빨간불 오류 발생)
 
+    - 처음 오는 파라미터 : 기댓갑, 두번째 오는 파라미터 : 실제값
+
     - 종류 : junit, assetj
 
       - junit
-
+    
         - ```
           Assertions.assertEquals(member, result);
           ```
 
       - assetj
-
+    
         - ```
           Assertions.assertThat(member).isEqualTo(result);
           ```
+
+- other ex)
+
+  - ```
+        @Test
+        public void findByName() {
+            // 회원가입
+            Member member1 = new Member();
+            member1.setName("spring1");
+            repository.save(member1);
+    
+            Member member2 = new Member();
+            member2.setName("spring2");
+            repository.save(member2);
+    
+            Member result = repository.findByName("spring2").get();
+    
+            // 가져온 값이 제대로 되었는지 확인
+            assertThat(result).isEqualTo(member1);
+    ```
+
+    - 오류 발생
+
+  - ```
+        @Test
+        public void findAll() {
+            Member member1 = new Member();
+            member1.setName("spring1");
+            repository.save(member1);
+    
+            Member member2 = new Member();
+            member2.setName("spring2");
+            repository.save(member2);
+    
+            List<Member> result = repository.findAll();
+    				// 갯수가 맞는지 확인 
+            assertThat(result.size()).isEqualTo(2);
+        }
+    ```
+
+- 주의 사항
+
+  - 위 모든 코드를 한번에 테스트할 경우 오류 발생
+
+    - 이유 : 모든 테스트 함수가 같은 변수 명을 가지고 있다
+
+      member1에 넣은 후에 다시 member1에 넣어서 테스트하려고 하면 중복되기 때문에 오류가 발생
+
+    - 해결책 : 테스트 하나가 끝난 후에 데이터를 클리어 해줘야 한다.
+
+      - MemoryMemberRepository
+
+        ```
+            public void clearStore() {
+                store.clear();
+            }
+        ```
+
+      - MemoryMemberRepositoryTest
+
+        ```
+        		// 테스트 하나가 끝날 때마다 실행해주는 콜백 함수
+        		public void afterEach() {
+                repository.clearStore();
+            }
+        ```
+
+    - 테스트 같은 경우 서로서로 의존성이 없게 설계해야 한다
+
+      따라서 위 코드를 추가해야 하는 것이다.
+
+- Tip
+
+  - 개발을 할 때에 메인을 만들고 테스트를 사용할 수 있지만
+
+    역으로 테스트 케이스를 먼저 만들고 메인을 만들 수 있다.
 
