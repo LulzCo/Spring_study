@@ -24,6 +24,10 @@
 
 -------
 
+- domain : 비즈니스 로직이 들어가는 클래스
+
+- repository : DB에 접근하는 메서드들을 사용하는 인터페이스
+
 - domain.member
 
   ```
