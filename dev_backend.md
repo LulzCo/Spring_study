@@ -250,3 +250,77 @@
 
     역으로 테스트 케이스를 먼저 만들고 메인을 만들 수 있다.
 
+-------
+
+- 서비스를 만들기 위해서는 리포지토리 필수
+
+```
+package com.hello.hellospring.service;
+
+import com.hello.hellospring.domain.Member;
+import com.hello.hellospring.repository.MemberRepository;
+import com.hello.hellospring.repository.MemoryMemberRepository;
+import com.hello.hellospring.repository.Oprional;
+
+import java.util.List;
+import java.util.Optional;
+
+public class MemberService {
+    private final MemberRepository memberRepository = new MemoryMemberRepository();
+    /*
+    * 회원가입
+    * */
+    public Long join(Member member) {
+        // 같은 이름이 있는 중복 회원X
+        /*
+        Optional<Member> result = memberRepository.findByName(member.getName());
+        result.ifPresent(m -> {
+            throw new IllegalStateException("이미 존재하는 회원입니다.");
+        });
+        */
+        validateDuplicateMember(member);
+
+
+        memberRepository.save(member);
+        return member.getId();
+    }
+
+    private void validateDuplicateMember(Member member) {
+        memberRepository.findByName(member.getName())
+                .ifPresent(m -> {
+                    throw new IllegalStateException("이미 존재하는 회원입니다.");
+                });
+    }
+    /*
+    * 전체 회원 조회
+    * */
+    public List<Member> findMembers() {
+        return memberRepository.findAll();
+    }
+
+    /*
+    * id로 회원 조회
+    * */
+    public Optional<Member> findOne(Long memberId) {
+        return memberRepository.findById(memberId);
+    }
+}
+```
+
+
+
+
+
+
+
+- tip
+
+  - Optional 단축키 cmd + opt + v
+
+  - 로직 생성 후 ctrl + t => extract method : 로직을 함수로 만들어주고 명령까지 수행해주는 단축키
+
+  - 서비스를 개발하는 경우에는 기획자들을 위해서 비즈니스 용어를 사용하도록 하자
+
+    리포지토리 같은 경우에는 개발자스럽게 해도 상관없음
+
+   
