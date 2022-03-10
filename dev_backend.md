@@ -122,7 +122,53 @@
 
 ------
 
+- 테스트 케이스
 
+  - 개발한 기능을 실행해서 테스트할 때 자바의 main 메서드를 통해 실행하거나, 웹 애플리케이션의 컨트롤러를 통해서 해당 기능을 실행 => 오래 걸리고, 여러 테스트를 한번에 실행하기 어렵다는 단점이 있음 => 따라서 테스트 케이스 실행
 
+- src.test.java
 
+  ```
+  package com.hello.hellospring.repository;
+  
+  import com.hello.hellospring.domain.Member;
+  import org.junit.jupiter.api.Assertions;
+  import org.junit.jupiter.api.Test;
+  
+  public class MemoryMemberRepositoryTest {
+  
+      MemberRepository repository = new MemoryMemberRepository();
+  
+      @Test
+      public void save() {
+          Member member = new Member();
+          member.setName("spring");
+  
+          repository.save(member);
+  
+          Member result = repository.findById(member.getId()).get();
+  
+          // 비교값 확인
+  //        System.out.println("result = " + (result == member));     // 터미널 출력
+          Assertions.assertEquals(member, result);        // param 순서 => db값, 추출값
+  //        Assertions.assertThat(member).isEqualTo(result);
+      }
+  }
+  ```
+
+  - Assertions : 인텔리제이 내 터미널에서 오류가 있는지 없는지 확인 가능(초록불 성공, 빨간불 오류 발생)
+
+    - 종류 : junit, assetj
+
+      - junit
+
+        - ```
+          Assertions.assertEquals(member, result);
+          ```
+
+      - assetj
+
+        - ```
+          Assertions.assertThat(member).isEqualTo(result);
+          ```
 
