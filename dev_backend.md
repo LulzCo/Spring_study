@@ -254,6 +254,8 @@
 
 - 서비스를 만들기 위해서는 리포지토리 필수
 
+sre.main.java.service.MemberService
+
 ```
 package com.hello.hellospring.service;
 
