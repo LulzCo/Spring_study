@@ -309,12 +309,6 @@ public class MemberService {
 }
 ```
 
-
-
-
-
-
-
 - tip
 
   - Optional 단축키 cmd + opt + v
@@ -325,4 +319,150 @@ public class MemberService {
 
     리포지토리 같은 경우에는 개발자스럽게 해도 상관없음
 
-   
+- test service
+
+  - tip
+
+    - cmd + shift + t : 테스트 코드 생성 단축키
+
+      - junit5 선택, 테스트할 멤버 선택
+
+    - 테스트 코드 같은 경우 한국어로 사용해도 상관없다.
+
+      - 직관적으로 볼 수 있다는 장점
+      - 실제 코드 반영 x
+
+    - ```
+      //given									값이 주어졌을 때
+      
+      //when									실행을 하면
+      
+      //then									데이터 검증
+      ```
+
+      테스트 할 경우, 위 주석으로 더 보기 좋게 코드를 작성할 수 있다.
+
+    
+
+    MemberServiceTesr
+
+    ```
+    package com.hello.hellospring.service;
+    
+    import com.hello.hellospring.domain.Member;
+    import com.hello.hellospring.repository.MemberRepository;
+    import com.hello.hellospring.repository.MemoryMemberRepository;
+    import org.assertj.core.api.AbstractThrowableAssert;
+    import org.assertj.core.api.Assertions;
+    import org.junit.jupiter.api.AfterEach;
+    import org.junit.jupiter.api.BeforeEach;
+    import org.junit.jupiter.api.Test;
+    
+    import java.util.Optional;
+    
+    import static org.junit.jupiter.api.Assertions.*;
+    
+    class MemberServiceTest {
+    
+        MemberService memberService;
+        MemoryMemberRepository memoryMemberRepository;
+        // clearStore 를 이용하여 각 테스트 후에 메모리 클리어
+        /*
+        MemberService 안에서 이미 이 객체를 사용하고 있기 때문에 굳이 또 넣으면
+        같은 클래스이지만 인스턴스가 두 개인 경우가 되어서 효율이 나오지 않는다.
+        private final MemoryMemberRepository memoryMemberRepository = new MemoryMemberRepository();
+        */
+    		
+    		
+    		/* 
+    		afterEach() 메서드에서 clearStore를 사용하기 위해서 memoryMemberRepository를 가져온다.
+    		그냥 가져오면 되는 것처럼 보이지만 memoryMemberRepository는 MemberService에서 이미 사용중이며
+    		다시 선언하게 되는 경우 또 다른 인스턴스를 생성하게 되어 메모리 상에 오류가 생긴다.
+    		(memoryMemberRepository는 DB를 조작하는 부분이기에 같은 인스턴스여야 한다.)
+    		따라서, MemberService(다음 코드표)에서 MemoryMemberRepository를 가져오는 부분을 수정한다.
+    		*/
+        @BeforeEach
+        public void beforeEach() {
+            memoryMemberRepository = new MemoryMemberRepository();
+            memberService = new MemberService(memoryMemberRepository);
+        }
+    
+        @AfterEach
+        public void afterEach() {
+            memoryMemberRepository.clearStore();
+        }
+    
+        void join() {
+            //given
+            Member member = new Member();
+            member.setName("spring");
+    
+            //when
+            Long saveId = memberService.join(member);
+    
+            //then
+            Member findMember = memberService.findOne(saveId).get();
+            Assertions.assertThat(member.getName()).isEqualTo(findMember.getName());
+        }
+    
+        @Test
+        public void 중복_회원_예외() {
+            // given
+            Member member1 = new Member();
+            member1.setName("spring");
+    
+            Member member2 = new Member();
+            member2.setName("spring");
+    
+            // when
+            /*
+            memberService.join(member1);
+            try {
+                memberService.join(member2);
+                fail();
+            } catch (IllegalStateException e) {
+                // memberService에서 작성한 오류 내용과 비교
+                Assertions.assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다.");
+            }
+            */
+    
+            memberService.join(member1);
+            // member2를 넣었을 때 발생하는 오류와 비교 하는 메서드
+            assertThrows(IllegalStateException.class, () -> memberService.join(member2));
+            // 오류 내용과 실제 오류 내용을 바교하는 방법
+            IllegalStateException e = assertThrows(IllegalStateException.class, () -> memberService.join(member2));
+            Assertions.assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다.");
+    
+            // then
+    
+        }
+    
+    
+        @Test
+        void findMembers() {
+        }
+    
+        @Test
+        void findOne() {
+        }
+    }
+    ```
+
+    MemberService
+
+    ```
+    public class MemberService {
+    
+    //	private final MemberRepository memberRepository = new MemoryMemberRepository();
+    		
+    // 다음과 같이 코드를 수정하여 serviceTest에서 memberRepository를 가져올 수 있도록 한다.
+        private final MemberRepository memberRepository;
+        
+        public MemberService(MemberRepository memberRepository) {
+            this.memberRepository = memberRepository;
+        }
+    ```
+
+    - 클래스 구조체를 사용하여 객체가 의존하는 또 다른 객체를 외부에서 선언하고 이를 주입받아 사용해야 데이터가 문제 없이 주고받을 수 있다.
+
+      => 이를 Dependency Injection이라고 한다. (의존성 주입)
