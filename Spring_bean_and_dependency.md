@@ -77,3 +77,5 @@
       return new dbMemberRepository(); 로 수정하면 다른 어떠한 코드들은 수정할 필요가 없다
 
     - 컴포넌트 스캔(어노테이션)을 이용하게 되면 다른 여러 코드들을 수정할 상황이 생긴다
+
+- @Autowired 의 경우 service, controller, repository를 컴포넌트라고 구현을 하지 않으면 동작하지 않는다.
