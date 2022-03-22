@@ -61,3 +61,189 @@
 
   - 프로젝트 디렉터리 내에서 sql 디렉터리를 만들어 어떤 테이블을 만들었는지 저장하면 나중에 db 관리가 효율적이게 됨(ddl.sql로 저장)
 
+
+
+- 순수 jdbc
+
+  - JdbcMemberRepository
+
+    ```
+    package com.hello.hellospring.repository;
+    
+    import com.hello.hellospring.domain.Member;
+    import org.springframework.jdbc.datasource.DataSourceUtils;
+    
+    import javax.sql.DataSource;
+    import java.sql.*;
+    import java.util.ArrayList;
+    import java.util.List;
+    import java.util.Optional;
+    
+    public class JdbcMemberRepository implements MemberRepository {
+    
+        private final DataSource dataSource;
+    
+        public JdbcMemberRepository(DataSource dataSource) {
+            this.dataSource = dataSource;
+        }
+    
+        @Override
+        public Member save(Member member) {
+            String sql = "insert into member(name) values(?)";
+    
+            Connection conn = null;
+            PreparedStatement pstmt = null;
+            ResultSet rs = null;
+    
+            try {
+                conn = getConnection();
+                pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+    
+                pstmt.setString(1, member.getName());
+    
+                pstmt.executeUpdate();
+                rs = pstmt.getGeneratedKeys();
+    
+                if (rs.next()) {
+                    member.setId(rs.getLong(1));
+                } else {
+                    throw new SQLException("id 조회 실패");
+                }
+                return member;
+            } catch (Exception e) {
+                throw new IllegalStateException(e);
+            } finally {
+                close(conn, pstmt, rs);
+            }
+        }
+    
+        private void close(Connection conn, PreparedStatement pstmt, ResultSet rs) {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            if (conn != null) {
+                close(conn);
+            }
+        }
+    
+        private void close(Connection conn) {
+            DataSourceUtils.releaseConnection(conn, dataSource);
+        }
+    
+        private Connection getConnection() {
+            return DataSourceUtils.getConnection(dataSource);
+        }
+    
+        @Override
+        public Optional<Member> findById(Long id) {
+            String sql = "select * from member where id = ?";
+    
+            Connection conn = null;
+            PreparedStatement pstmt = null;
+            ResultSet rs = null;
+    
+            try {
+                conn = getConnection();
+                pstmt = conn.prepareStatement(sql);
+                pstmt.setLong(1, id);
+    
+                rs = pstmt.executeQuery();
+    
+                if (rs.next()) {
+                    Member member = new Member();
+                    member.setId(rs.getLong("id"));
+                    member.setName(rs.getString("name"));
+                    return Optional.of(member);
+                } else {
+                    return Optional.empty();
+                }
+            } catch (Exception e) {
+                throw new IllegalStateException(e);
+            } finally {
+                close(conn, pstmt, rs);
+            }
+        }
+    
+        @Override
+        public Optional<Member> findByName(String name) {
+            String sql = "select * from member where name = ?";
+    
+            Connection conn = null;
+            PreparedStatement pstmt = null;
+            ResultSet rs = null;
+    
+            try {
+                conn = getConnection();
+                pstmt = conn.prepareStatement(sql);
+                pstmt.setString(1, name);
+    
+                rs = pstmt.executeQuery();
+    
+                if(rs.next()) {
+                    Member member = new Member();
+                    member.setId(rs.getLong("id"));
+                    member.setName(rs.getString("name"));
+                    return Optional.of(member);
+                } else {
+                    return Optional.empty();
+                }
+            } catch (Exception e) {
+                throw new IllegalStateException(e);
+            } finally {
+                close(conn, pstmt, rs);
+            }
+        }
+    
+        @Override
+        public List<Member> findAll() {
+            String sql = "select * from member";
+    
+            Connection conn = null;
+            PreparedStatement pstmt = null;
+            ResultSet rs = null;
+    
+            try {
+                conn = getConnection();
+                pstmt = conn.prepareStatement(sql);
+    
+                rs = pstmt.executeQuery();
+    
+                List<Member> members = new ArrayList<>();
+                while(rs.next()) {
+                    Member member = new Member();
+                    member.setId(rs.getLong("id"));
+                    member.setName(rs.getString("name"));
+                    members.add(member);
+                }
+    
+                return members;
+            } catch (Exception e) {
+                throw new IllegalStateException(e);
+            } finally {
+                close(conn, pstmt, rs);
+            }
+        }
+    }
+    
+    ```
+
+    - rs.next()
+
+      - ResultSet은 SQL 문을 실행한 값이 들어가는 곳
+
+      - rs.next()는 "SQL 문을 실행하여 값이 있다" 라고 해석
+
+    - close()를 사용하는 이유
+      - 매번 사용하지 않으면 SQL을 조회할 때 메모리 충돌이 발생할 수도 있기 때문에
+    - 
