@@ -1,6 +1,7 @@
 package com.springboot.api.controller;
 
 import com.springboot.api.dto.MemberDto;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,8 +24,14 @@ public class PutController {
         return sb.toString();
     }
 
-    @PutMapping(value = "/member2")
-    public String putMemberDto(@RequestBody MemberDto memberDto) {
+    @PutMapping(value = "/member1")
+    public String putMemberDto1(@RequestBody MemberDto memberDto) {
         return memberDto.toString();
+    }
+
+    @PutMapping(value = "member2")
+    public MemberDto pustMemberDto2(@RequestBody MemberDto memberDto) {
+        // 리턴 타입이 객체 타입으로 온다
+        return memberDto;
     }
 }
