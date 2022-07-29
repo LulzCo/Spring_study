@@ -1,5 +1,6 @@
 package com.springboot.api.controller;
 
+import com.springboot.api.dto.MemberDto;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -22,5 +23,10 @@ public class PostController {
         });
 
         return sb.toString();
+    }
+
+    @PostMapping(value = "/member2")
+    public String postMemberDto(@RequestBody MemberDto memberDto) {
+        return memberDto.toString();
     }
 }
