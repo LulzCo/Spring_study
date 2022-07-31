@@ -1,3 +1,6 @@
+/*rest api 명세를 문서화른 간편화 시키기 위해서 필요
+rest api는 개발 과정 중 항상 수정이 되기 마련이다
+따라서 그 흔적을 남겨줘야 다른 개발자들에게도 편할 것이다.*/
 package com.springboot.api.config;
 
 import org.springframework.context.annotation.Bean;
