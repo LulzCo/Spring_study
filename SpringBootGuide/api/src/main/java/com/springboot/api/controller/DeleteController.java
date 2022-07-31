@@ -1,8 +1,10 @@
 package com.springboot.api.controller;
 
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@ApiOperation(value = "Delete 예제")
 @RequestMapping(value = "/api/v1/delete-api")
 public class DeleteController {
 

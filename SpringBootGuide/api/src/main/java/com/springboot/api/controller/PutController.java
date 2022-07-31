@@ -1,6 +1,7 @@
 package com.springboot.api.controller;
 
 import com.springboot.api.dto.MemberDto;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 @RestController
+@ApiOperation(value = "Put 예제")
 @RequestMapping(value = "/api/v1/put-api")
 public class PutController {
 

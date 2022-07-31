@@ -1,11 +1,13 @@
 package com.springboot.api.controller;
 
 import com.springboot.api.dto.MemberDto;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
 @RestController
+@ApiOperation(value = "Post 예제")
 @RequestMapping("/api/v1/post-api")
 public class PostController {
 

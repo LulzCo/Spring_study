@@ -1,11 +1,13 @@
 package com.springboot.api.controller;
 
 import com.springboot.api.dto.MemberDto;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
 @RestController
+@ApiOperation(value = "Get 에제")
 @RequestMapping("/api/v1/get-api")
 public class GetController {
 
