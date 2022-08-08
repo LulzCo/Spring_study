@@ -2,6 +2,8 @@ package com.springboot.api.controller;
 
 import com.springboot.api.dto.MemberDto;
 import io.swagger.annotations.ApiOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -10,9 +12,13 @@ import java.util.Map;
 @ApiOperation(value = "Get 에제")
 @RequestMapping("/api/v1/get-api")
 public class GetController {
+/*로그 출력*/
+    private final Logger LOGGER = LoggerFactory.getLogger(GetController.class);
+
 
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
     public String getHello() {
+        LOGGER.info("getHello 메서드 호출");
         return "Hello, World!!";
     }
 
@@ -24,6 +30,7 @@ public class GetController {
     // 중광호 안에 값으로 들어감
     @GetMapping(value = "/variable1/{variable}")
     public String getVariable(@PathVariable String variable) {
+        LOGGER.info("@PathVariable을 통해 들어온 값 : {}", variable);
         return variable;
     }
 
