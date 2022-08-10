@@ -7,6 +7,8 @@ import com.springboot.jpa.data.entity.Product;
 import com.springboot.jpa.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.time.LocalDateTime;
+
 public class ProductServiceImpl implements ProductService {
 
     private final ProductDAO productDAO;
@@ -30,16 +32,39 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductResponseDto saveProduct(ProductDto productDto) {
-        return null;
+        Product product = new Product();
+        product.setName(productDto.getName());
+        product.setPrice(productDto.getPrice());
+        product.setStock(productDto.getStock());
+        product.setCreateAt(LocalDateTime.now());
+        product.setUpdateAt(LocalDateTime.now());
+
+        Product saveProduct = productDAO.insertProduct(product);
+
+        ProductResponseDto productResponseDto = new ProductResponseDto();
+        productResponseDto.setNumber(saveProduct.getNumber());
+        productResponseDto.setName(saveProduct.getName());
+        productResponseDto.setStock(saveProduct.getStock());
+        productResponseDto.setPrice(saveProduct.getPrice());
+
+        return productResponseDto;
     }
 
     @Override
     public ProductResponseDto changeProductName(Long number, String name) throws Exception {
-        return null;
+        Product changeProduct = productDAO.updateProductName(number, name);
+
+        ProductResponseDto productResponseDto = new ProductResponseDto();
+        productResponseDto.setNumber(changeProduct.getNumber());
+        productResponseDto.setName(changeProduct.getName());
+        productResponseDto.setPrice(changeProduct.getPrice());
+        productResponseDto.setStock(changeProduct.getStock());
+
+        return productResponseDto;
     }
 
     @Override
     public void deleteProduct(Long number) throws Exception {
-
+        productDAO.deleteProduct(number);
     }
 }
