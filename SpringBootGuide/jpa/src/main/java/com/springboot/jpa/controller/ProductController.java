@@ -1,5 +1,6 @@
 package com.springboot.jpa.controller;
 
+import com.springboot.jpa.data.dto.ChangeProductNameDto;
 import com.springboot.jpa.data.dto.ProductDto;
 import com.springboot.jpa.data.dto.ProductResponseDto;
 import com.springboot.jpa.service.ProductService;
