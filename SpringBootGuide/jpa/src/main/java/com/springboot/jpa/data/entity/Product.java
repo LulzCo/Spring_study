@@ -1,9 +1,18 @@
 package com.springboot.jpa.data.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@Getter                     // Lombok 기능
+@Setter                     // Lombok 기능
+@NoArgsConstructor          // Lombok 기능
+@AllArgsConstructor         // Lombok 기능
 @Table(name = "product")
 public class Product {
 
@@ -24,51 +33,52 @@ public class Product {
 
     private LocalDateTime updateAt;
 
-    public Long getNumber() {
-        return number;
-    }
-
-    public void setNumber(Long number) {
-        this.number = number;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getPrice() {
-        return price;
-    }
-
-    public void setPrice(Integer price) {
-        this.price = price;
-    }
-
-    public Integer getStock() {
-        return stock;
-    }
-
-    public void setStock(Integer stock) {
-        this.stock = stock;
-    }
-
-    public LocalDateTime getCreateAt() {
-        return createAt;
-    }
-
-    public void setCreateAt(LocalDateTime createAt) {
-        this.createAt = createAt;
-    }
-
-    public LocalDateTime getUpdateAt() {
-        return updateAt;
-    }
-
-    public void setUpdateAt(LocalDateTime updateAt) {
-        this.updateAt = updateAt;
-    }
+//    Lombok으로 간편화
+//    public Long getNumber() {
+//        return number;
+//    }
+//
+//    public void setNumber(Long number) {
+//        this.number = number;
+//    }
+//
+//    public String getName() {
+//        return name;
+//    }
+//
+//    public void setName(String name) {
+//        this.name = name;
+//    }
+//
+//    public Integer getPrice() {
+//        return price;
+//    }
+//
+//    public void setPrice(Integer price) {
+//        this.price = price;
+//    }
+//
+//    public Integer getStock() {
+//        return stock;
+//    }
+//
+//    public void setStock(Integer stock) {
+//        this.stock = stock;
+//    }
+//
+//    public LocalDateTime getCreateAt() {
+//        return createAt;
+//    }
+//
+//    public void setCreateAt(LocalDateTime createAt) {
+//        this.createAt = createAt;
+//    }
+//
+//    public LocalDateTime getUpdateAt() {
+//        return updateAt;
+//    }
+//
+//    public void setUpdateAt(LocalDateTime updateAt) {
+//        this.updateAt = updateAt;
+//    }
 }
