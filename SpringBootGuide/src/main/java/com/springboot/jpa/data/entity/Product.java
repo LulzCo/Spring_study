@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 @Setter                     // Lombok 기능
 @NoArgsConstructor          // Lombok 기능
 @AllArgsConstructor         // Lombok 기능
+//@Data => d위 Lombok 기능들을 한번에 사용하는 어노테이션
 @Table(name = "product")
 public class Product {
 
