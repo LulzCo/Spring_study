@@ -39,22 +39,28 @@ public class GetController {
         return var;
     }
 
-    @ApiOperation(value = "get method example", notes = "@RequestParam을 활용한 get method")
-    @GetMapping(value = "/request1")
-    public String getRequest1(
-            @ApiParam(value = "name", required = true) @RequestParam String name,
-            @ApiParam(value = "email", required = true) @RequestParam String email,
-            @ApiParam(value = "organization", required = true) @RequestParam String organization
-    ) {
-        return name + email + organization;
-    }
-
-    @GetMapping(value = "/request2")
-    public String getRequest2(@RequestParam Map<String, String> param) {
-        StringBuilder sb = new StringBuilder();
-
-        param.forEach((key, value) -> sb.append(key + " : " + value + "\n"));
-
-        return sb.toString();
-    }
+//    @ApiOperation(value = "get method example", notes = "@RequestParam을 활용한 get method")
+//    @GetMapping(value = "/request1")
+//    public String getRequestParam1(
+//            @ApiParam(value = "name", required = true) @RequestParam String name,
+//            @ApiParam(value = "email", required = true) @RequestParam String email,
+//            @ApiParam(value = "organization", required = true) @RequestParam String organization
+//    ) {
+//        return name + email + organization;
+//    }
+//
+//    @GetMapping(value = "/request2")
+//    public String getRequestParam2(@RequestParam Map<String, String> param) {
+//        StringBuilder sb = new StringBuilder();
+//
+//        param.forEach((key, value) -> sb.append(key + " : " + value + "\n"));
+//
+//        return sb.toString();
+//    }
+//
+//    @ApiOperation(value = "get method example", notes = "get Method using DTO")
+//    @GetMapping(value = "request3")
+//    public String getRequestParam3(MemberDto memberDto) {
+//        return memberDto.toString();
+//    }
 }
