@@ -20,7 +20,7 @@ public class GetController {
     @RequestMapping(value = "/hello")
     public String getHello() {
         Logger.info("getHello() 호출");
-        return "Hello World!!";
+        return "Hello Get Api!!";
     }
 
     @GetMapping(value = "/name")
