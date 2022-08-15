@@ -47,7 +47,7 @@ public class GetController {
             @ApiParam(value = "email", required = true) @RequestParam String email,
             @ApiParam(value = "organization", required = true) @RequestParam String organization
     ) {
-        return name + email + organization;
+        return name + " " + email + " " + organization;
     }
 
     @GetMapping(value = "/request2")

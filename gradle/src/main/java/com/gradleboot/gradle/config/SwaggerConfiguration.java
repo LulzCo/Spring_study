@@ -19,7 +19,7 @@ public class SwaggerConfiguration {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.springboot.gradle"))
+                .apis(RequestHandlerSelectors.basePackage("com.gradleboot.gradle"))
                 .paths(PathSelectors.any())
                 .build();
     }
