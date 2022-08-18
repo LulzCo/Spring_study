@@ -1,5 +1,4 @@
 package com.gradleboot.gradle.controller.apiController;
-
 import com.gradleboot.gradle.data.member.dto.MemberDto;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -16,22 +15,18 @@ public class GetController {
 
     private final Logger Logger = LoggerFactory.getLogger(GetController.class);
 
-
     @RequestMapping(value = "/hello")
     public String getHello() {
-        Logger.info("getHello() 호출");
         return "Hello Get Api!!";
     }
 
     @GetMapping(value = "/name")
     public String getName() {
-        Logger.info("getName() 호출");
         return "Seongwon";
     }
 
     @GetMapping(value = "/variable1/{variable}")
     public String getVariable1(@PathVariable String variable) {
-        Logger.info("@PathVariable1 : {}", variable);
         return variable;
     }
 
