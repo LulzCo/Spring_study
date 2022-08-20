@@ -4,6 +4,7 @@ import com.gradleboot.gradle.data.product.dto.ChangeProductNameDto;
 import com.gradleboot.gradle.data.product.dto.ProductDto;
 import com.gradleboot.gradle.data.product.dto.ProductResponseDto;
 import com.gradleboot.gradle.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ public class ProductController {
 
     private final ProductService productService;
 
+    @Autowired
     public ProductController(ProductService productService) {
         this.productService = productService;
     }
@@ -32,7 +34,7 @@ public class ProductController {
 
         return ResponseEntity.status(HttpStatus.OK).body(productResponseDto);
     }
-    
+
     @PutMapping
     public ResponseEntity<ProductResponseDto> changeProductName(@RequestBody ChangeProductNameDto changeProductNameDto) throws Exception {
 
