@@ -1,4 +1,4 @@
-package com.gradleboot.gradle.controller;
+package com.gradleboot.gradle.controller.helloController;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
