@@ -34,7 +34,7 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public void deleteProdict(Long number) throws Exception {
+    public void deleteProduct(Long number) throws Exception {
 
     }
 }
