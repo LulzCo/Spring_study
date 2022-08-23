@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Service
 public class ProductServiceImpl implements ProductService {
 
-    private ProductDao productDao;
+    private final ProductDao productDao;
 
     @Autowired
     public ProductServiceImpl(ProductDao productDao) {
