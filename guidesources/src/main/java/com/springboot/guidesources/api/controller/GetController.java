@@ -2,6 +2,8 @@ package com.springboot.guidesources.api.controller;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/v1/get-api")
 public class GetController {
@@ -28,6 +30,13 @@ public class GetController {
         return result;
     }
 
-//    @GetMapping("/request2")
-//    public String getRequest2Param2()
+    @GetMapping("/request2")
+    public String getRequest2Param2(@RequestParam Map<String, String> param) {
+        StringBuilder sb = new StringBuilder();
+
+        param.forEach((key, value) ->
+                sb.append(key + " : " + value + "\n"));
+
+        return sb.toString();
+    }
 }
