@@ -1,9 +1,6 @@
 package com.springboot.guidesources.api.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/get-api")
@@ -24,4 +21,13 @@ public class GetController {
     public String getVariable2(@PathVariable("variable") String var, @PathVariable("variable2") String var2) {
         return var + " : " + var2;
     }
+
+    @GetMapping("/request1")
+    public String getRequestParam1(@RequestParam String name, @RequestParam String email, @RequestParam String org) {
+        String result = "name : " + name + ", email : " + email + ", org : " + org;
+        return result;
+    }
+
+//    @GetMapping("/request2")
+//    public String getRequest2Param2()
 }
