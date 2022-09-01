@@ -1,5 +1,6 @@
 package com.springboot.guidesources.api.controller;
 
+import com.springboot.guidesources.api.data.dto.MemberDto;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -38,5 +39,10 @@ public class GetController {
                 sb.append(key + " : " + value + "\n"));
 
         return sb.toString();
+    }
+
+    @GetMapping("/request3")
+    public String getRequestParam3(MemberDto memberDto) {
+        return memberDto.toString();
     }
 }
