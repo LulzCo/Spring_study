@@ -1,5 +1,6 @@
 package com.springboot.guidesources.api.controller;
 
+import com.springboot.guidesources.api.data.dto.MemberDto;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,5 +20,10 @@ public class PostController {
                 sb.append(key + " : " + value + "\n"));
 
         return sb.toString();
+    }
+
+    @PostMapping("/member2")
+    public String postMemberDto(@RequestBody MemberDto memberDto) {
+        return memberDto.toString();
     }
 }
