@@ -3,6 +3,7 @@ package com.springboot.guidesources.jpa.data.dao.impl;
 import com.springboot.guidesources.jpa.data.dao.ProductDao;
 import com.springboot.guidesources.jpa.data.entity.Product;
 import com.springboot.guidesources.jpa.data.repository.ProductRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -11,6 +12,7 @@ public class ProductDaoImpl implements ProductDao {
 
     private ProductRepository productRepository;
 
+    @Autowired
     public ProductDaoImpl(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
