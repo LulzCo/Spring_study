@@ -1,7 +1,6 @@
 package com.springboot.guidesources.jpa.service.impl;
 
 import com.springboot.guidesources.jpa.data.dao.ProductDao;
-import com.springboot.guidesources.jpa.data.dao.impl.ProductDaoImpl;
 import com.springboot.guidesources.jpa.data.dto.ProductDto;
 import com.springboot.guidesources.jpa.data.dto.ProductResponseDto;
 import com.springboot.guidesources.jpa.data.entity.Product;
