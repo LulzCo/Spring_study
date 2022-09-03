@@ -3,6 +3,7 @@ package com.springboot.guidesources.jpa.service.impl;
 import com.springboot.guidesources.jpa.data.dao.ProductDao;
 import com.springboot.guidesources.jpa.data.dto.ProductDto;
 import com.springboot.guidesources.jpa.data.dto.ProductResponseDto;
+import com.springboot.guidesources.jpa.data.entity.Product;
 import com.springboot.guidesources.jpa.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductResponseDto getProduct(Long number) {
-        return null;
+        Product product = productDao.selectProduct(number);
+
+        ProductResponseDto productResponseDto = new ProductResponseDto();
     }
 
     @Override
