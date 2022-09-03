@@ -8,7 +8,7 @@ public interface ProductDao {
 
     Product selectProduct(Long number);
 
-    Product updateProduct(Long number, String name);
+    Product updateProductName(Long number, String name) throws Exception;
 
     void deleteProduct(Long number) throws Exception;
 }
