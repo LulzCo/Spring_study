@@ -1,5 +1,6 @@
 package com.springboot.guidesources.jpa.controller;
 
+import com.springboot.guidesources.jpa.data.dto.ChangeProductNameDto;
 import com.springboot.guidesources.jpa.data.dto.ProductDto;
 import com.springboot.guidesources.jpa.data.dto.ProductResponseDto;
 import com.springboot.guidesources.jpa.service.ProductService;
@@ -36,9 +37,9 @@ public class ProductController {
     }
 
     @PutMapping
-    public ResponseEntity<ProductResponseDto> changeProductName(Long number, String name) throws Exception {
+    public ResponseEntity<ProductResponseDto> changeProductName(@RequestBody ChangeProductNameDto changeProductNameDto) throws Exception {
 
-        ProductResponseDto productResponseDto = productService.changeProductName(number, name);
+        ProductResponseDto productResponseDto = productService.changeProductName(changeProductNameDto.getNumber(), changeProductNameDto.getName());
 
         return ResponseEntity.status(HttpStatus.OK).body(productResponseDto);
     }
