@@ -29,7 +29,7 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<ProductResponseDto> saveProduct(ProductDto productDto) {
+    public ResponseEntity<ProductResponseDto> saveProduct(@RequestBody ProductDto productDto) {
 
         ProductResponseDto productResponseDto = productService.saveProduct(productDto);
 
