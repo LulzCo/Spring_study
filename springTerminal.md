@@ -55,8 +55,6 @@ sdk use springboot 2.7.9
 
 스프링부트를 설치해야 함
 
-
-
 ```
 spring init -d web, jpa -g tobyspring -n helloboot -j 11 -x helloboot -b 2.7.9
 ```
