@@ -41,5 +41,4 @@ public class ConfigureationSingletonTest {
         System.out.println("bean = " + bean.getClass());
 
     }
-
 }
