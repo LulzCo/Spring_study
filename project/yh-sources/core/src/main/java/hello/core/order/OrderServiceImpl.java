@@ -4,11 +4,13 @@ import hello.core.discount.DiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
 //import hello.core.member.MemoryMemberRepository;
+import lombok.RequiredArgsConstructor;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor            // 생성자 주입을 자동으로 해줘서 겁나 편리함!!!
 public class OrderServiceImpl implements OrderService {
     // 이러한 필드 주입은 DI 프레임워크가 없으면 아무것도 할 수 없다 테스트 코드 작성할 때도 불편하므로 되도록이면 사용하지 않는 것이 좋다
 //    @Autowired private MemberRepository memberRepository;
@@ -18,11 +20,16 @@ public class OrderServiceImpl implements OrderService {
 
     // 이러한 생성자 주입은 프레임워크에 의존적이지 않고 순수 자바 언어의 특징을 가장 잘 살리는 방법이다.
     //    @Autowired(required = false)      -> 변경 가능성이 있는 의존관계일 경우에 사용, 주입할 대상이 없으면 오류가 발생하고 그 오류를 해결하기 위해 사용
+    // ------------Lombok이 자동으로 생성해줌
+
 //    @Autowired      // 이처럼 생성자가 하나만 있는 경우에는 생략 가능
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
-        this.memberRepository = memberRepository;
-        this.discountPolicy = discountPolicy;
-    }
+//    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+//        this.memberRepository = memberRepository;
+//        this.discountPolicy = discountPolicy;
+//    }
+
+    // ------------Lombok이 자동으로 생성해줌
+
 
 //    @Autowired      // 일반 함수로 의존관계 주입
 //    public void init(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
