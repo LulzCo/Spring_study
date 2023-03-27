@@ -7,7 +7,7 @@ import hello.core.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 @RequiredArgsConstructor            // 생성자 주입을 자동으로 해줘서 겁나 편리함!!!
 public class OrderServiceImplTemp implements OrderService {
     // 이러한 필드 주입은 DI 프레임워크가 없으면 아무것도 할 수 없다 테스트 코드 작성할 때도 불편하므로 되도록이면 사용하지 않는 것이 좋다
