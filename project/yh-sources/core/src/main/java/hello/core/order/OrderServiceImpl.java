@@ -16,8 +16,9 @@ public class OrderServiceImpl implements OrderService {
     private final MemberRepository memberRepository;
     private final DiscountPolicy discountPolicy;
 
+    // 이러한 생성자 주입은 프레임워크에 의존적이지 않고 순수 자바 언어의 특징을 가장 잘 살리는 방법이다.
     //    @Autowired(required = false)      -> 변경 가능성이 있는 의존관계일 경우에 사용, 주입할 대상이 없으면 오류가 발생하고 그 오류를 해결하기 위해 사용
-    @Autowired      // 이처럼 생성자가 하나만 있는 경우에는 생략 가능
+//    @Autowired      // 이처럼 생성자가 하나만 있는 경우에는 생략 가능
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
