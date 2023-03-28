@@ -10,7 +10,8 @@ import org.springframework.stereotype.Component;
 @Component
 //@Qualifier("mainDiscountPolicy")
 @Primary        // -> fix보다 우선순위를 줄 수 있다 -> Quilifier보다 훨씬 많이 쓰인다!!
-@MainDiscountPolicy
+//@Qualifier("mainDiscountPolicy")
+@MainDiscountPolicy     // 어노테이션을 활용하여 @Qualifier("mainDiscountPolicy")를 대체할 수 있다
 public class RateDiscountPolicy implements DiscountPolicy {
 
     private int discountPercent = 10;
