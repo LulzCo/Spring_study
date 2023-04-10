@@ -70,7 +70,7 @@ public class SingletonWithPrototypeTest1 {
         private Provider<PrototypeBean> prototypeBeanProvider;                  // 자바 표준에서 사용하는 Provider 기능, ObjectProvider와 큰 차이는 없다.
 
         public int logic() {
-            PrototypeBean prototypeBean = prototypeBeanProvider.get(); 
+            PrototypeBean prototypeBean = prototypeBeanProvider.get();
             prototypeBean.addCount();
             int count = prototypeBean.getCount();
             return count;

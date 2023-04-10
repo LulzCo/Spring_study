@@ -26,6 +26,10 @@ dependencies {
 
     // provider 사용하기 위한 라이브러리
     implementation 'javax.inject:javax.inject:1'
+
+    // web 라이브러리 추가
+    implementation 'org.springframework.boot:spring-boot-starter-web'       // -> 톰켓 서버 기능 포함되어 있다.
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     // lombok 라이브러리 추가 시작
